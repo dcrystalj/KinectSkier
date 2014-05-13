@@ -34,7 +34,8 @@ public class movement : MonoBehaviour {
 			fpsinputController.SendMessage("setX", leftRight);
 			gt.text = leftRight.ToString();
 		}
-		mouseLook.SendMessage("setX", 0.0);
+		else
+			mouseLook.SendMessage("setX", 0.01f);
 
 
 	}
