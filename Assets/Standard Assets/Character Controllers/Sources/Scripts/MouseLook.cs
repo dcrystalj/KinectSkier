@@ -17,9 +17,7 @@ using System.Collections;
 [AddComponentMenu("Camera-Control/Mouse Look")]
 public class MouseLook : MonoBehaviour {
 
-	public GameObject moveMent;
-
-	public float x;
+	public float x = 0;
 
 	public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
 	public RotationAxes axes = RotationAxes.MouseXAndY;
@@ -37,30 +35,37 @@ public class MouseLook : MonoBehaviour {
 	public void setX(float x){
 		this.x = x;
 	}
+	public float getX() {
+		return x;
+	}
+
+	
 
 	void Update ()
 	{
 		if (axes == RotationAxes.MouseXAndY)
 		{
-			float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
-			Debug.Log(Input.GetAxis("Mouse X"));
+			float rotationX = transform.localEulerAngles.y + x * sensitivityX;
+			Debug.Log("x+y" + x * sensitivityX);
+			
 			rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
 			rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 			
 			transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
 		}
-		else if (axes == RotationAxes.MouseX)
+		else// (axes == RotationAxes.MouseX)
 		{
 			transform.Rotate(0, x * sensitivityX, 0);
-			Debug.Log(x);
+			Debug.Log("ll");
+			Debug.Log("ll" + x + "  " + sensitivityX);
 		}
-		else
+		/*else
 		{
 			rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
 			rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
-			
+			Debug.Log("test");
 			transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);
-		}
+		}*/
 	}
 	
 	void Start ()

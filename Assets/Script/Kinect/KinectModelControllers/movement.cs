@@ -5,16 +5,18 @@ using System;
 
 public class movement : MonoBehaviour {
 	public GameObject mouseLook;
+	public GameObject fpsinputController;
 	public SkeletonWrapper sw;
 	public int player;
-	string display = " ";
 	float leftRight;
 	float upDown;
+	public GUIText gt;
 
 	// Update is called once per frame
 	void Update () {
-		if (player == -1)
-						return;
+		if (player == -1) {
+			return;
+		}
 		if (sw.pollSkeleton ()) 
 		{
 			Vector3 Hip_Center = new Vector3(
@@ -28,8 +30,12 @@ public class movement : MonoBehaviour {
 				sw.bonePos [player, 2].z);
 			this.leftRight = Shoulder_Center.x - Hip_Center.x;
 			this.upDown = Hip_Center.y;
+			mouseLook.SendMessage("setX", leftRight);
+			fpsinputController.SendMessage("setX", leftRight);
+			gt.text = leftRight.ToString();
 		}
-		mouseLook.SendMessage("setX", leftRight);
+		mouseLook.SendMessage("setX", 0.0);
+
 
 	}
 

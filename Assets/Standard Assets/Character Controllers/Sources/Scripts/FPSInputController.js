@@ -1,5 +1,9 @@
 private var motor : CharacterMotor;
+public var x: float;
 
+public function setX(x){
+	this.x = x;
+}
 // Use this for initialization
 function Awake () {
 	motor = GetComponent(CharacterMotor);
@@ -8,7 +12,8 @@ function Awake () {
 // Update is called once per frame
 function Update () {
 	// Get the input vector from keyboard or analog stick
-	var directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+	//var directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+	var directionVector = new Vector3(x, 0, .9);
 	
 	if (directionVector != Vector3.zero) {
 		// Get the length of the directon vector and then normalize it
