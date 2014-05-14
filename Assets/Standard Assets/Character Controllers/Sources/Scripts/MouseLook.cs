@@ -28,7 +28,10 @@ public class MouseLook : MonoBehaviour {
 	public float minimumY = -60F;
 	public float maximumY = 60F;
 	public float x;
-
+	public float y;
+	public void setY(float y) {
+		this.y = y;
+	}
 	public void setX(float x){
 		this.x = x;
 	}
