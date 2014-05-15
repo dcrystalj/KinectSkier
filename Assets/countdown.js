@@ -10,7 +10,6 @@ var gt: GUIText;
 
 function Update () {
 	//t.text = "0";
-//	Debug.Log("guitext" + gt.guiText + "  " + gt.guiText == "0");
 	if(timer == 3 && gt.guiText == "0")
 		return;
 	

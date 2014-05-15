@@ -35,7 +35,7 @@ public class movement : MonoBehaviour {
 			gt.text = leftRight.ToString();
 		}
 		else
-			mouseLook.SendMessage("setX", 0.01f);
+			mouseLook.SendMessage("setX", 0.0f);
 
 
 	}
