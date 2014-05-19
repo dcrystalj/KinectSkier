@@ -31,7 +31,7 @@ public class movement : MonoBehaviour {
 			this.leftRight = Shoulder_Center.x - Hip_Center.x;
 			this.upDown = Hip_Center.y;
 			mouseLook.SendMessage("setX", leftRight);
-			fpsinputController.SendMessage("setX", leftRight);
+			fpsinputController.SendMessage("setIsDown", this.upDown);
 			gt.text = leftRight.ToString();
 		}
 		else

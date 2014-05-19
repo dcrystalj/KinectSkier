@@ -19,11 +19,15 @@ var inputMoveDirection : Vector3 = Vector3.zero;
 @System.NonSerialized
 var inputJump : boolean = false;
 
+@System.NonSerialized
+var isDown : boolean = false;
+
 class CharacterMotorMovement {
 	// The maximum horizontal speed when moving
 	var maxForwardSpeed : float = 10.0;
 	var maxSidewaysSpeed : float = 10.0;
 	var maxBackwardsSpeed : float = 10.0;
+	
 	
 	// Curve for multiplying speed based on slope (negative = downwards)
 	var slopeSpeedMultiplier : AnimationCurve = AnimationCurve(Keyframe(-90, 1), Keyframe(0, 1), Keyframe(90, 0));
@@ -56,6 +60,7 @@ class CharacterMotorMovement {
 	
 	@System.NonSerialized
 	var lastHitPoint : Vector3 = Vector3(Mathf.Infinity, 0, 0);
+	
 }
 
 var movement : CharacterMotorMovement = CharacterMotorMovement();
@@ -332,6 +337,11 @@ function FixedUpdate () {
 }
 
 function Update () {
+	if(this.isDown){
+		movement.maxForwardSpeed=1000;
+	}else{
+		movement.maxForwardSpeed=100;
+	}
 	if (!useFixedUpdate)
 		UpdateFunction();
 }
