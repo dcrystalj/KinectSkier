@@ -19,7 +19,7 @@ var inputMoveDirection : Vector3 = Vector3.zero;
 @System.NonSerialized
 var inputJump : boolean = false;
 
-@System.NonSerialized
+//@System.NonSerialized
 var isDown : boolean = false;
 
 class CharacterMotorMovement {
@@ -340,7 +340,7 @@ function Update () {
 	if(this.isDown){
 		movement.maxForwardSpeed=1000;
 	}else{
-		movement.maxForwardSpeed=100;
+		movement.maxForwardSpeed=0;
 	}
 	if (!useFixedUpdate)
 		UpdateFunction();

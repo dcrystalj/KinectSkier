@@ -1,5 +1,5 @@
 private var motor : CharacterMotor;
-var isDown = false;
+private var isDown1 = false;
 // Use this for initialization
 function Awake () {
 	motor = GetComponent(CharacterMotor);
@@ -32,14 +32,14 @@ function Update () {
 	motor.inputMoveDirection = transform.rotation * directionVector;
 	motor.inputJump = Input.GetButton("Jump");
 	//update the speed, whether the charactor is down or not
-	motor.isDown = this.isDown;
+	motor.isDown = isDown1;
 }
 
 function setIsDown(upDown){
 	if(upDown==1){
-		this.isDown = true;
+		isDown1 = true;
 	}else{
-		this.isDown = false;
+		isDown1 = false;
 	}
 }
 
