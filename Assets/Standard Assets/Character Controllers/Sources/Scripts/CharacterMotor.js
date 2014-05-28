@@ -338,7 +338,7 @@ function FixedUpdate () {
 
 function Update () {
 	if(this.isDown){
-		movement.maxForwardSpeed=1000;
+		movement.maxForwardSpeed=300;
 	}else{
 		movement.maxForwardSpeed=0;
 	}

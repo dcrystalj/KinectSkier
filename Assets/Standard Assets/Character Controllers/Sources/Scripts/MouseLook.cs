@@ -36,7 +36,8 @@ public class MouseLook : MonoBehaviour {
 		this.x = x;
 	}
 	float rotationY = 0F;
-	
+	//float rotationX = 0F;
+	//Quaternion originalRotation;
 	void Update ()
 	{
 		if (axes == RotationAxes.MouseXAndY)
@@ -51,7 +52,13 @@ public class MouseLook : MonoBehaviour {
 		else if (axes == RotationAxes.MouseX)
 		{
 			transform.Rotate(0, x * sensitivityX, 0);
+			//rotationX += x * sensitivityX;
 			Debug.Log(x);
+
+			//rotationX = ClampAngle (rotationX, minimumX, maximumX);
+			//Quaternion xQuaternion = Quaternion.AngleAxis (rotationX, Vector3.up);
+			//transform.localRotation = originalRotation * xQuaternion;
+			
 		}
 		else
 		{
@@ -67,5 +74,21 @@ public class MouseLook : MonoBehaviour {
 		// Make the rigid body not change rotation
 		if (rigidbody)
 			rigidbody.freezeRotation = true;
+	}
+
+	public static float ClampAngle (float angle, float min, float max)
+		
+	{
+		
+		if (angle < -360F)
+			
+			angle += 360F;
+		
+		if (angle > 360F)
+			
+			angle -= 360F;
+		
+		return Mathf.Clamp (angle, min, max);
+		
 	}
 }
