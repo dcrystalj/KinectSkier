@@ -4,35 +4,41 @@ using System.Collections;
 public class verticalCamera : MonoBehaviour {
 
 	public GameObject mc;
+	public Terrain terrain;
+	public GameObject terrainGO;
+	public GameObject fpc;
+
 	// Use this for initialization
 	void Start () {
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
 		RaycastHit rcHit = new RaycastHit();
-		
-		Ray bottom = new Ray(this.camera.transform.position,Vector3.down);
 
+		Vector3 theRay = fpc.transform.TransformDirection (Vector3.down);
+		if (Physics.Raycast (transform.position, theRay, out rcHit)) {
 
+			float distance = rcHit.distance;
+			Debug.Log(Vector3.up.x + "  " + Vector3.up.y + "  " + Vector3.up.z);
+			Debug.Log(rcHit.normal.x + "  " + rcHit.normal.y + "  " + rcHit.normal.z);
+			Vector3 tmp =  rcHit.normal;
+			tmp.y = transform.rotation.y;
+			Quaternion q = Quaternion.FromToRotation (Vector3.up * Time.deltaTime, tmp);
+			//float pos = (transform.localPosition.y - distance) +1;
+			//transform.localPosition = pos;
 
-		if (Physics.Raycast(bottom,out rcHit,20))
-		{
-			double posy = mc.transform.position.y;
-			//with this you rotate object to adjust with terrain
-			Quaternion ro= mc.transform.rotation;
-			Vector3 rn = rcHit.normal;
-
-			Quaternion q = Quaternion.FromToRotation (Vector3.up * Time.deltaTime, rn);
-			q.x=0;
-			q.z=0;
-
-			mc.transform.rotation = Quaternion.Slerp(
-				mc.transform.rotation, 
+			transform.rotation = Quaternion.Slerp(
+				transform.rotation, 
 				q,
 				Time.deltaTime
-				);
+			);
 		}
+		//this.transform.position = graphics.transform.position;
+
+		Ray bottom = new Ray(fpc.transform.position, Vector3.down);
+
+
 	}
 }
